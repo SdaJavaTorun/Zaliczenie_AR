@@ -7,3 +7,7 @@
 *.iml
 out
 gen
+target
+src/main/resources/
+src/test/
+target/generated-sources/
