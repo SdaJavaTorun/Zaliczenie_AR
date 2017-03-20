@@ -1,17 +1,19 @@
 package com.sda.erp.model;
 
-/* Created by Artur Rózgowski on 3/18/17 */
-public class Department {
+/* Created by Artur Rózgowski on 3/19/17 */
+public class DepartmentModel {
 
     private int departmentNo;
     private String departmentName;
 
-    public Department(int departmentNo, String departmentName) {
+    public DepartmentModel () {}
+
+    public DepartmentModel (int departmentNo, String departmentName) {
         this.departmentNo = departmentNo;
         this.departmentName = departmentName;
     }
 
-    public Department(int departmentNo) {
+    public DepartmentModel(int departmentNo) {
         this.departmentNo = departmentNo;
     }
 

@@ -1,8 +1,9 @@
 package com.sda.erp.model;
 
-/* Created by Artur Rózgowski on 3/17/17 */
-public class Person implements IntPerson {
+public class PersonModel {
 
+    private static int nextId = 1;
+    private int id;
     private String firstName;
     private String lastName;
     private char gender;
@@ -10,11 +11,10 @@ public class Person implements IntPerson {
     private int kids;
     private boolean marital;
 
-    private Person person;
-    private Department department;
-    private Salary salary;
+    private SalaryModel salaryM;
+    private DepartmentModel departmentM;
 
-    public Person(String firstName, String lastName,
+    public PersonModel(String firstName, String lastName,
                   char gender, int age, int kids, boolean marital) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,18 +24,23 @@ public class Person implements IntPerson {
         this.marital = marital;
     }
 
+    public PersonModel () {}
+
+    //po każdym wywolaniu/dodaniu obiektu zwieksza sie wartosc nextId statycznej
+    public void setId() {
+        this.id = nextId;
+        nextId++;
+    }
+    public int getId() { return id;}
+
     public String getFirstName() {
         return firstName;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -43,7 +48,6 @@ public class Person implements IntPerson {
     public char getGender() {
         return gender;
     }
-
     public void setGender(char gender) {
         this.gender = gender;
     }
@@ -51,7 +55,6 @@ public class Person implements IntPerson {
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
@@ -59,26 +62,24 @@ public class Person implements IntPerson {
     public int getKids() {
         return kids;
     }
-
-    public void setKids(int kinds) {
+    public void setKids(int kids) {
         this.kids = kids;
     }
 
     public boolean isMarital() {
         return marital;
     }
-
     public void setMarital(boolean marital) {
         this.marital = marital;
     }
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "PersonM{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", departmentNo=" + department.getDepartmentNo() +
-                ", salary=" + salary.getSalary() +
+//                ", departmentNo=" + department.getDepartmentNo() +
+//                ", salary=" + salary.getSalary() +
                 ", gender=" + gender +
                 ", age=" + age +
                 ", kids=" + kids +
@@ -87,15 +88,15 @@ public class Person implements IntPerson {
     }
 
     public String toStringShort() {
-        return "Person{" +
+        return "PersonM{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", salary=" + salary.getSalary() +
+                ", salary=" + salaryM.getSalary() +
                 '}';
     }
 
     public String toStringUpper() {
-        return "Person{" +
+        return "PersonM{" +
                 "firstName='" + firstName.toUpperCase() + '\'' +
                 ", lastName='" + lastName.toUpperCase() + '\'' +
                 '}';

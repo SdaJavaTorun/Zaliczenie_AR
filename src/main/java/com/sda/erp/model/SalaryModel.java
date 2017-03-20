@@ -1,18 +1,18 @@
 package com.sda.erp.model;
 
 /* Created by Artur Rózgowski on 3/18/17 */
-public class Salary implements IntSalary {
+public class SalaryModel implements IntSalaryModel {
 
     private float salary;
 
-    public float getSalary() {
-        return salary;
+    private PersonModel person;
+
+    public SalaryModel(float salary) {
+        this.salary = salary;
     }
 
-    private Person person;
-
-    public Salary(float salary) {
-        this.salary = salary;
+    public float getSalary() {
+        return salary;
     }
 
     public void setSalary(float salary) {
