@@ -5,6 +5,9 @@ public interface IntPersonModel {
 
     public void toStringShort();
     public String toStringUpper();
+
+    public void toStringUpper(int index);
+
     public void removePerson();
-    public void editPerson();
+    //public void editPerson();
 }

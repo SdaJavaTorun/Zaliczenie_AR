@@ -1,5 +1,7 @@
 package com.sda.erp.controller;
 
+import com.sda.erp.model.PersonModel;
+
 import java.util.Scanner;
 
 /* Created by Artur Rózgowski on 3/18/17 */
@@ -15,10 +17,9 @@ public class UserInput {
         personC.setPersonLastName(in.nextLine());
         System.out.println("Podaj wiek pracownika:");
         personC.setPersonAge(in.nextInt());
-        //System.out.println("Podaj dział:");
-        //department.setDepartmentName(in.nextLine());
+        //System.out.println("Podaj pensje:");
+        //personC.setSalary(in.nextFloat());
 
         return personC;
     }
-
 }

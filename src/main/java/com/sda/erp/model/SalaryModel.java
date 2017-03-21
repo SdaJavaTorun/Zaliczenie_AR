@@ -7,6 +7,8 @@ public class SalaryModel implements IntSalaryModel {
 
     private PersonModel person;
 
+    public SalaryModel () {}
+
     public SalaryModel(float salary) {
         this.salary = salary;
     }
@@ -16,8 +18,9 @@ public class SalaryModel implements IntSalaryModel {
     }
 
     public void setSalary(float salary) {
-        if (this.person.isMarital())
+        if (this.person.isMarital()) {
             this.salary = this.salary * 0.97F;
+        }
         this.salary = salary;
     }
 
@@ -28,20 +31,21 @@ public class SalaryModel implements IntSalaryModel {
 
     public void setSalaryRaise (float rise) {
         float percent = 0;
-
         percent = (rise * 100) / this.salary;
 
         if (this.person.isMarital()) percent = percent + 3;
-
         percent = percent + 2 * this.salary;
 
         System.out.println("Pensja podwyższona o procent: " + percent);
-
         this.salary = this.salary + percent*this.salary/100;
     }
 
     public boolean salaryValue (float sal) {
         if (sal > this.salary) return true;
         else return false;
+    }
+
+    public void countPeopleWithHiSalary (float s) {
+
     }
 }
