@@ -2,6 +2,7 @@ package com.sda.erp.controller;
 
 import com.sda.erp.model.IntPersonModel;
 import com.sda.erp.model.PersonModel;
+import com.sda.erp.model.SalaryModel;
 import com.sda.erp.view.PersonView;
 
 import java.io.Serializable;
@@ -11,26 +12,40 @@ import java.util.Scanner;
 
 public class PersonController implements IntPersonModel, Serializable {
 
-    private PersonView personV;
-    private ReadWriteObjectToFile operFile;
+    private PersonModel personM = new PersonModel();
+    private EditPersonMenu ePersonM = new EditPersonMenu();
+    PersonView personV;
+    private SalaryModel salaryM = new SalaryModel();
+    private UserInput userInput = new UserInput();
+    private Scanner in = new Scanner(System.in);
 
-    PersonModel personM = new PersonModel();
-    UserInput userInput = new UserInput();
-    Scanner in = new Scanner(System.in);
-
-    List<PersonController> modelList = new ArrayList<>();
+    private List<PersonController> modelList = new ArrayList<>();
 
     public PersonController () {}
 
-    public PersonController (PersonModel personM, PersonView personV) {
+    public PersonController (PersonModel personM,
+                             PersonView personV,
+                             EditPersonMenu ePersonM,
+                             SalaryModel salaryM) {
         this.personM = personM;
         this.personV = personV;
+        this.ePersonM = ePersonM;
+        this.salaryM = salaryM;
     }
 
     public void exportToTXTFile() throws Exception {
         System.out.println("Export: Podaj nazwę pliku");
         String fileName = in.nextLine();
         ReadWriteObjectToFile.writeToTXTFile(fileName, modelList);
+    }
+
+    public void countPeopleWithHiSalary (float s) {
+        int counter = 0;
+        for (PersonController pc: modelList) {
+            if (pc.getSalary() >= s) counter++;
+        }
+        System.out.println(
+                "Liczba pracowników z pensją nie niższą niż " + s + " wynosi: " + counter);
     }
 
     public void addPerson () {
@@ -54,12 +69,86 @@ public class PersonController implements IntPersonModel, Serializable {
         return personM.getLastName();
     }
 
-    public void setPersonAge (int age) {
-        personM.setAge(age);
-    }
-
+    public void setPersonAge (int age) { personM.setAge(age); }
     public int getPersonAge () {
         return personM.getAge();
+    }
+
+    public void setPersonKids (int age) {
+        personM.setKids(age);
+    }
+    public int getPersonKids () {
+        return personM.getKids();
+    }
+
+    public void setPersonMarital (boolean tf) { personM.setMarital(tf); }
+    public boolean isPersonMarital () { return personM.isMarital (); }
+
+    public void setPersonGender (char g) { personM.setGender(g); }
+    public char getPersonGender () { return personM.getGender(); }
+
+    public float getSalary () {
+        return salaryM.getSalary();
+    }
+    public void setSalary (float s) {
+        salaryM.setSalary(s);
+    }
+
+    public void changeLastName(int id, List<PersonController> modelList) {
+
+        if (modelList.get(id).getPersonGender() == 'K') {
+            System.out.println("Podaj nowe nazwisko...");
+            modelList.get(id-1).setPersonLastName(in.nextLine());
+        }
+        else System.out.println("Nie kobiecie nie da rady zmienić nazwiska");
+    }
+
+    public void changeAge(int id, List<PersonController> modelList) {
+        System.out.println("Podaj nowy wiek pracownika...");
+        modelList.get(id-1).setPersonAge(in.nextInt());
+    }
+
+    public void changeMaritalStatus(int id, List<PersonController> modelList) {
+        System.out.println("If Rozwodzik/Wdodzik press 'R' czy nowy związek press 'Z'");
+        if (in.next().charAt(0) == 'R') modelList.get(id-1).setPersonMarital(false);
+        else modelList.get(id-1).setPersonMarital(true);
+    }
+
+    public void changeKids(int id, List<PersonController> modelList) {
+        System.out.println("Podaj liczbę dzieci");
+        modelList.get(id-1).setPersonKids(in.nextInt() + modelList.get(id-1).getPersonKids());
+    }
+
+    public void changeSalary (int id, List<PersonController> modelList) {
+        System.out.println("Podaj nową płacę");
+        modelList.get(id-1).setSalary(in.nextFloat());
+    }
+
+    public void changeDepartment (int id, List<PersonController> modelList) {
+
+    }
+
+    public void editPersonMenu() throws Exception {
+        printFullList();
+        ePersonM.editMenu(modelList);
+    }
+
+    public void removePerson() {
+        printFullList();
+        System.out.println ("\nKtórego pracownika usunąć? Podaj numer...");
+        int id = in.nextInt();
+        modelList.remove(id-1);
+        printFullList();
+    }
+
+    public void printFullList () {
+        System.out.println("Lista pełna pracowników");
+        System.out.println("|-----------------------------------------------------|");
+        System.out.printf("%-4s %-20s %-20s %-4s %-10s" , "Id", "Imię", "Nazwisko", "Wiek", "Płaca\n");
+        for (PersonController pc: modelList)
+            System.out.printf("\n%-4d %-20s %-20s %-4d %-10.2f zł",
+                    pc.getPersonId(), pc.getPersonFirstName(),
+                    pc.getPersonLastName(), pc.getPersonAge(), pc.getSalary());
     }
 
     @Override
@@ -72,38 +161,21 @@ public class PersonController implements IntPersonModel, Serializable {
     public void toStringShort() {
         System.out.println("Skrócona wersja listy pracowników");
         System.out.println("|-----------------------------------------------------|");
-        System.out.printf("%-4s %-20s %-20s %-4s", "Id", "Imię", "Nazwisko", "Wiek\n");
+        System.out.printf("%-4s %-20s %-20s %-10s", "Id", "Imię", "Nazwisko", "Płaca\n");
         for (PersonController pc: modelList)
-            System.out.printf("\n%-4d %-20s %-20s %-4d",
+                                System.out.printf("\n%-4d %-20s %-20s %-10.2f zł",
                                 pc.getPersonId(), pc.getPersonFirstName(),
-                                pc.getPersonLastName(), pc.getPersonAge());
+                                pc.getPersonLastName(), pc.getSalary());
     }
+
     @Override
     public String toStringUpper() {
         return null;
     }
 
     @Override
-    public void removePerson() {
-        printFullList();
-        System.out.println ("\nKtórego pracownika usunąć? Podaj numer...");
-        int id = in.nextInt();
-        modelList.remove(id+1);
-        printFullList();
-    }
-
-    @Override
-    public void editPerson() {
-
-    }
-
-    public void printFullList () {
-        System.out.println("Lista pełna pracowników");
-        System.out.println("|-----------------------------------------------------|");
-        System.out.printf("%-4s %-20s %-20s %-4s", "Id", "Imię", "Nazwisko", "Wiek\n");
-        for (PersonController pc: modelList)
-            System.out.printf("\n%-4d %-20s %-20s %-4d",
-                    pc.getPersonId(), pc.getPersonFirstName(),
-                    pc.getPersonLastName(), pc.getPersonAge());
+    public void toStringUpper(int index) {
+        System.out.println(modelList.get(index).getPersonFirstName().toUpperCase());
+        System.out.println(modelList.get(index).getPersonLastName().toUpperCase());
     }
 }

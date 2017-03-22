@@ -3,25 +3,28 @@ package com.sda.erp.model;
 public class PersonModel {
 
     private static int nextId = 1;
-    private int id;
-    private String firstName;
-    private String lastName;
+    private int id = 0;
+    private String firstName ="";
+    private String lastName ="";
     private char gender;
-    private int age;
-    private int kids;
-    private boolean marital;
+    private int age = 0;
+    private int kids = 0;
+    private boolean marital = false;
 
     private SalaryModel salaryM;
     private DepartmentModel departmentM;
 
     public PersonModel(String firstName, String lastName,
-                  char gender, int age, int kids, boolean marital) {
+                  char gender, int age, int kids, boolean marital,
+                       SalaryModel s, DepartmentModel d) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
         this.kids = kids;
         this.marital = marital;
+        this.salaryM = s;
+        this.departmentM =d;
     }
 
     public PersonModel () {}

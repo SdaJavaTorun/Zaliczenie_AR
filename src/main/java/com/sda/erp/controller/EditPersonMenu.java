@@ -6,11 +6,13 @@ import com.sda.erp.view.GUI;
 import com.sda.erp.view.PersonView;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class EditPersonMenu {
 
-    public static void mainMenu () throws Exception {
+    public void editMenu(List<PersonController> modelList) throws Exception {
+
         int option = 0;
         PersonModel personM = new PersonModel();
         PersonView personV = new PersonView();
@@ -22,8 +24,9 @@ public class Menu {
         boolean optionFlag = true;
 
         while (optionFlag) {
-            System.out.println(GUI.systemInfo());
-            GUI.showMenu();
+            System.out.println("\nPodaj nr pracownka, którego chcesz edytować:");
+            int number = in.nextInt();
+            GUI.showEditMenu();
             boolean flag = true;
 
             while (flag) {
@@ -35,16 +38,13 @@ public class Menu {
                     in.next();
                 }
             }
-
             switch (option) {
-                case 1: personC.toStringShort(); break;
-                case 2: personC.addPerson(); break;
-                case 3: personC.exportToTXTFile(); break;
-                case 4: personC.removePerson(); break;
-                case 5: personC.editPersonMenu(); break;
-                case 6: GUI.showSubMenu1(); break;
-                case 7: GUI.showSubMenu2(); break;
-                case 8: GUI.systemInfo(); break;
+                case 1: personC.changeLastName(number, modelList); break;
+                case 2: personC.changeAge(number, modelList); break;
+                case 3: personC.changeSalary(number, modelList); break;
+                case 4: personC.changeDepartment(number, modelList); break;
+                case 5: personC.changeMaritalStatus(number, modelList); break;
+                case 6: personC.changeKids(number, modelList); break;
                 case 0: optionFlag = false; break;
             }
         }

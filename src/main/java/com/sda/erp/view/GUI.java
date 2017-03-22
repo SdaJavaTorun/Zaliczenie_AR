@@ -51,6 +51,6 @@ public class GUI {
     }
 
     public static String systemInfo() {
-        return "\nTO JEST MOJA FIRMA";
+        return "\nTO JEST PROGRAM DO OBSŁUGI HR";
     }
 }
