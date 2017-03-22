@@ -18,9 +18,6 @@ public class SalaryModel implements IntSalaryModel {
     }
 
     public void setSalary(float salary) {
-        if (this.person.isMarital()) {
-            this.salary = this.salary * 0.97F;
-        }
         this.salary = salary;
     }
 

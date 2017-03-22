@@ -9,5 +9,5 @@ public interface IntPersonModel {
     public void toStringUpper(int index);
 
     public void removePerson();
-    //public void editPerson();
+    public void editPersonMenu() throws Exception;
 }

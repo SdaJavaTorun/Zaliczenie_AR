@@ -17,8 +17,8 @@ public class UserInput {
         personC.setPersonLastName(in.nextLine());
         System.out.println("Podaj wiek pracownika:");
         personC.setPersonAge(in.nextInt());
-        //System.out.println("Podaj pensje:");
-        //personC.setSalary(in.nextFloat());
+        System.out.println("Podaj pensje:");
+        personC.setSalary(in.nextFloat());
 
         return personC;
     }

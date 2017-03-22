@@ -37,33 +37,15 @@ public class Menu {
             }
 
             switch (option) {
-                case 1:
-                    personC.toStringShort();
-                    break;
-                case 2:
-                    personC.addPerson();
-                    break;
-                case 3:
-                    personC.exportToTXTFile();
-                    break;
-                case 4:
-                    personC.removePerson();
-                    break;
-                case 5:
-                    personC.editPersonMenu();
-                    break;
-                case 6:
-                    GUI.showSubMenu1();
-                    break;
-                case 7:
-                    GUI.showSubMenu2();
-                    break;
-                case 8:
-                    GUI.systemInfo();
-                    break;
-                case 0:
-                    optionFlag = false;
-                    break;
+                case 1: personC.toStringShort(); break;
+                case 2: personC.addPerson(); break;
+                case 3: personC.exportToTXTFile(); break;
+                case 4: personC.removePerson(); break;
+                case 5: personC.editPersonMenu(); break;
+                case 6: GUI.showSubMenu1(); break;
+                case 7: GUI.showSubMenu2(); break;
+                case 8: GUI.systemInfo(); break;
+                case 0: optionFlag = false; break;
             }
         }
     }
