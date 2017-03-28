@@ -1,10 +1,13 @@
 package com.sda.erp.model;
 
-/* Created by Artur Rózgowski on 3/19/17 */
 public class DepartmentModel {
 
     private int departmentNo;
     private String departmentName;
+
+    public enum departmentName {
+        IT, HR, PRODUCTION, SALES
+    }
 
     public DepartmentModel () {}
 

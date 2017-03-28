@@ -1,30 +1,31 @@
 package com.sda.erp.controller;
 
-import com.sda.erp.model.PersonModel;
-import com.sda.erp.model.SalaryModel;
 import com.sda.erp.view.GUI;
-import com.sda.erp.view.PersonView;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class EditPersonMenu {
+    /**
+     * constructor without arguments
+     */
+    public EditPersonMenu () {}
 
-    public void editMenu(List<PersonController> modelList) throws Exception {
+    public void editMenu() throws Exception {
 
-        int option = 0;
-        PersonModel personM = new PersonModel();
-        PersonView personV = new PersonView();
-        EditPersonMenu ePersonM = new EditPersonMenu();
-        SalaryModel salaryM = new SalaryModel();
-        PersonController personC = new PersonController(personM, personV, ePersonM, salaryM);
         Scanner in = new Scanner(System.in);
 
+        PersonController personController = new PersonController();
+        SalaryController salaryController = new SalaryController();
+        DepartController departController = new DepartController();
+
         boolean optionFlag = true;
+        int option = 0;
 
         while (optionFlag) {
-            System.out.println("\nPodaj nr pracownka, którego chcesz edytować:");
+            System.out.println("\nPodaj nr pracownika, którego chcesz edytować:");
             int number = in.nextInt();
             GUI.showEditMenu();
             boolean flag = true;
@@ -39,12 +40,12 @@ public class EditPersonMenu {
                 }
             }
             switch (option) {
-                case 1: personC.changeLastName(number, modelList); break;
-                case 2: personC.changeAge(number, modelList); break;
-                case 3: personC.changeSalary(number, modelList); break;
-                case 4: personC.changeDepartment(number, modelList); break;
-                case 5: personC.changeMaritalStatus(number, modelList); break;
-                case 6: personC.changeKids(number, modelList); break;
+                case 1: personController.changeLastName(number); break;
+                case 2: personController.changeAge(number); break;
+                case 3: salaryController.changeSalary(number); break;
+                case 4: departController.changeDepartment(number); break;
+                case 5: personController.changeMaritalStatus(number); break;
+                case 6: personController.changeKids(number); break;
                 case 0: optionFlag = false; break;
             }
         }
