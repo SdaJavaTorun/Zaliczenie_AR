@@ -1,10 +1,6 @@
 package com.sda.erp.controller;
 
-import com.sda.erp.model.PersonModel;
-import com.sda.erp.model.SalaryModel;
 import com.sda.erp.view.GUI;
-import com.sda.erp.view.PersonView;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,12 +8,10 @@ public class Menu {
 
     public static void mainMenu () throws Exception {
         int option = 0;
-        PersonModel personM = new PersonModel();
-        PersonView personV = new PersonView();
-        EditPersonMenu ePersonM = new EditPersonMenu();
-        SalaryModel salaryM = new SalaryModel();
-        PersonController personC = new PersonController(personM, personV, ePersonM, salaryM);
+        ListController listController = new ListController();
+        PersonController personController = new PersonController();
         Scanner in = new Scanner(System.in);
+        listController.setReadWriteObjectToFile();
 
         boolean optionFlag = true;
 
@@ -37,13 +31,16 @@ public class Menu {
             }
 
             switch (option) {
-                case 1: personC.toStringShort(); break;
-                case 2: personC.addPerson(); break;
-                case 3: personC.exportToTXTFile(); break;
-                case 4: personC.removePerson(); break;
-                case 5: personC.editPersonMenu(); break;
-                case 6: GUI.showSubMenu1(); break;
-                case 7: GUI.showSubMenu2(); break;
+                case 1: listController.toStringShort(); break;
+                case 2: listController.addPersonToList(); break;
+                case 3: personController.exportToTXTFile(); break;
+                case 4: personController.removePerson(); break;
+                case 5: listController.setPersonController();
+                        listController.setSalaryController();
+
+                        personController.editPersonMenu(); break;
+                case 6: SubMenu1.Menu(); break;
+                case 7: SubMenu2.Menu(); break;
                 case 8: GUI.systemInfo(); break;
                 case 0: optionFlag = false; break;
             }

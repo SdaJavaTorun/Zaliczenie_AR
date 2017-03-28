@@ -6,7 +6,7 @@ public class PersonModel {
     private int id = 0;
     private String firstName ="";
     private String lastName ="";
-    private char gender;
+    private char gender = '\u0000';
     private int age = 0;
     private int kids = 0;
     private boolean marital = false;
@@ -81,8 +81,8 @@ public class PersonModel {
         return "PersonM{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-//                ", departmentNo=" + department.getDepartmentNo() +
-//                ", salary=" + salary.getSalary() +
+                ", departmentNo=" + departmentM.getDepartmentNo() +
+                ", salary=" + salaryM.getSalary() +
                 ", gender=" + gender +
                 ", age=" + age +
                 ", kids=" + kids +
